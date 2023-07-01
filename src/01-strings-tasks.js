@@ -67,7 +67,7 @@ function getStringFromTemplate(firstName, lastName) {
  */
 
 function extractNameFromTemplate(str) {
-  const name = str.slice(7, str.length - 1);
+  const name = str.slice(7, -1);
   return name;
 }
 
@@ -205,8 +205,9 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  const middle = `│${' '.repeat(width - 2)}│\n`;
+  return `┌${'─'.repeat(width - 2)}┐\n${middle.repeat(height - 2)}└${'─'.repeat(width - 2)}┘\n`;
 }
 
 
@@ -245,8 +246,8 @@ function encodeToRot13(str) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
+function isString(value) {
+  return typeof (value) === 'string' || value instanceof String;
 }
 
 
