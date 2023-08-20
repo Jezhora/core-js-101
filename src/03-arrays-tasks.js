@@ -470,8 +470,14 @@ function sortCitiesArray(arr) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  const arr = Array.from({ length: n }, (_, rowInd) => Array.from({ length: n }, (__, colInd) => {
+    if (rowInd === colInd) {
+      return 1;
+    }
+    return 0;
+  }));
+  return arr;
 }
 
 /**
@@ -487,8 +493,11 @@ function getIdentityMatrix(/* n */) {
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  if (start === end) {
+    return [start];
+  }
+  return Array.from({ length: end - start + 1 }, (_, index) => start + index);
 }
 
 /**
@@ -502,10 +511,14 @@ function getIntervalArray(/* start, end */) {
  *   [ 'a', 'a', 'a', 'a' ]  => [ 'a' ]
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  return arr.sort((a, b) => a - b).reduce((acc, item) => {
+    if (item !== acc[acc.length - 1]) {
+      acc.push(item);
+    }
+    return acc;
+  }, []);
 }
-
 /**
  * Groups elements of the specified array by key.
  * Returns multimap of keys extracted from array elements via keySelector callback
@@ -539,7 +552,13 @@ function distinct(/* arr */) {
 function group(/* array, keySelector, valueSelector */) {
   throw new Error('Not implemented');
 }
-
+// console.log(group([
+//   { country: 'Belarus', city: 'Brest' },
+//   { country: 'Russia', city: 'Omsk' },
+//   { country: 'Russia', city: 'Samara' },
+//   { country: 'Belarus', city: 'Grodno' },
+//   { country: 'Belarus', city: 'Minsk' },
+//   { country: 'Poland', city: 'Lodz' }], 'Belarus'));
 
 /**
  * Projects each element of the specified array to a sequence
