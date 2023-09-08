@@ -549,16 +549,20 @@ function distinct(arr) {
  *    "Poland" => ["Lodz"]
  *   }
  */
-function group(/* array, keySelector, valueSelector */) {
-  throw new Error('Not implemented');
+function group(array, keySelector, valueSelector) {
+  const resultMap = array.reduce((result, item) => {
+    const country = keySelector(item);
+    const city = valueSelector(item);
+    if (!result.has(country)) {
+      result.set(country, []);
+    }
+
+    result.get(country).push(city);
+    return result;
+  }, new Map());
+
+  return resultMap;
 }
-// console.log(group([
-//   { country: 'Belarus', city: 'Brest' },
-//   { country: 'Russia', city: 'Omsk' },
-//   { country: 'Russia', city: 'Samara' },
-//   { country: 'Belarus', city: 'Grodno' },
-//   { country: 'Belarus', city: 'Minsk' },
-//   { country: 'Poland', city: 'Lodz' }], 'Belarus'));
 
 /**
  * Projects each element of the specified array to a sequence
@@ -573,8 +577,12 @@ function group(/* array, keySelector, valueSelector */) {
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], (x) => x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  const result = arr.reduce((acc, item) => {
+    const child = childrenSelector(item);
+    return acc.concat(child);
+  }, []);
+  return result;
 }
 
 
