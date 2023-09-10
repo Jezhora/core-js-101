@@ -598,9 +598,15 @@ function selectMany(arr, childrenSelector) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  return indexes.reduce((acc, index) => {
+    if (Array.from(acc)) {
+      return acc[index];
+    }
+    return arr;
+  }, arr);
 }
+// console.log(getElementByIndexes([[[ 1, 2, 3]]], [ 0, 0, 1 ]))
 
 
 /**
@@ -621,9 +627,29 @@ function getElementByIndexes(/* arr, indexes */) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  const indexes = Math.floor(arr.length / 2);
+  let head;
+  let tail;
+  if (arr.length % 2 !== 0) {
+    if (arr.length === 3) {
+      return arr.reverse();
+    }
+    head = arr.slice(indexes + 1);
+    tail = arr.reduce((acc, item, index) => {
+      if (index <= indexes) {
+        acc.push(item);
+      }
+      return acc.reverse();
+    }, []);
+  } else {
+    head = arr.slice(indexes);
+    tail = arr.slice(0, indexes);
+  }
+
+  return [...head, ...tail];
 }
+// console.log(swapHeadAndTail([1, 2, 3, 4]));
 
 
 module.exports = {
