@@ -27,9 +27,21 @@
  *  21 => 'Fizz'
  *
  */
-function getFizzBuzz(/* num */) {
-  throw new Error('Not implemented');
+function getFizzBuzz(num) {
+  let answer = '';
+  if (num % 3 === 0) {
+    answer += 'Fizz';
+  }
+  if ((num % 5 === 0)) {
+    answer += 'Buzz';
+  }
+
+  if (answer.length === 0) {
+    return num;
+  }
+  return answer;
 }
+// console.log(getFizzBuzz(2));
 
 
 /**
@@ -43,9 +55,13 @@ function getFizzBuzz(/* num */) {
  *   5  => 120
  *   10 => 3628800
  */
-function getFactorial(/* n */) {
-  throw new Error('Not implemented');
+function getFactorial(n) {
+  if (n === 1) {
+    return n;
+  }
+  return n * getFactorial(n - 1);
 }
+// console.log(getFactorial(10));
 
 
 /**
@@ -60,9 +76,13 @@ function getFactorial(/* n */) {
  *   5,10  =>  45 ( = 5+6+7+8+9+10 )
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
-function getSumBetweenNumbers(/* n1, n2 */) {
-  throw new Error('Not implemented');
+function getSumBetweenNumbers(n1, n2) {
+  if (n2 === n1) {
+    return n2;
+  }
+  return n2 + getSumBetweenNumbers(n1, n2 - 1);
 }
+// console.log(getSumBetweenNumbers(-1,1))
 
 
 /**
@@ -80,8 +100,11 @@ function getSumBetweenNumbers(/* n1, n2 */) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isTriangle(a, b, c) {
+  if (a < (b + c) && b < (a + c) && c < (a + b)) {
+    return true;
+  }
+  return false;
 }
 
 
@@ -117,9 +140,17 @@ function isTriangle(/* a, b, c */) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  if ((rect1.top + rect1.height) > rect2.top) {
+    if ((rect1.left + rect1.width) > rect2.left) {
+      return true;
+    }
+  }
+  return false;
 }
+// console.log(doRectanglesOverlap(
+//   {"top":0,"left":0,"width":90,"height":90},
+//   {"top":25,"left":100,"width":10,"height":10}))
 
 
 /**
@@ -150,6 +181,7 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  */
 function isInsideCircle(/* circle, point */) {
   throw new Error('Not implemented');
+  // const hip = Math.sqrt(point.x ** 2 + point.y ** 2);
 }
 
 
