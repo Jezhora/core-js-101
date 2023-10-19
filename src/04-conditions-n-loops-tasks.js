@@ -240,9 +240,27 @@ function findFirstSingleChar(str) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  const arr = [a.toString(), b.toString()].sort();
+
+  const start = () => {
+    if (isStartIncluded) {
+      return '[';
+    }
+    return '(';
+  };
+
+  const end = () => {
+    if (isEndIncluded) {
+      return ']';
+    }
+    return ')';
+  };
+  arr.splice(0, 1, `${start()}${arr[0]}`);
+  arr.splice(arr.length - 1, 1, ` ${arr[arr.length - 1]}${end()}`);
+  return arr.join();
 }
+// console.log(getIntervalString( 0, 1 , true, true))
 
 
 /**
@@ -319,9 +337,23 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  const str = num.toString();
+  let countNum = 0;
+
+  for (let i = 0; i < str.length; i += 1) {
+    countNum += +str[i];
+  }
+
+  const result = countNum.toString();
+  const countResult = [];
+  for (let j = 0; j < result.length; j += 1) {
+    countResult.push(+result[j]);
+  }
+
+  return countResult.reduce((acc, number) => acc + number, 0);
 }
+// console.log(getDigitalRoot(12345))
 
 
 /**
